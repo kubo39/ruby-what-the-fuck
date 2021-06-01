@@ -112,6 +112,6 @@ h.map { |_, v| v += 1 } #=> [2, 3]
 
 # rspec
 
-## letというメソッドがcall-by-need
+## letというメソッド名でcall-by-needになっている
 
 意味不明。
