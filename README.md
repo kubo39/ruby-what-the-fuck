@@ -60,18 +60,17 @@ arr = [].freeze
 arr[4] = 100 #=> FrozenError
 ```
 
-## `Array#<<` `Array#push` がselfを返す
+## `Array#pop` が値を返す
 
 ```ruby
-arr = []
-arr << 1 #=> [1]
+arr = [1,2]
+arr.pop #=> 2
+arr #=> [1]
 ```
 
-push操作において必ず矛盾した構造となるポイントが存在する(整合性が保たれていない)ため例外安全性における基本保証について守ることができない。
+pop操作中に値を返すような実装では必ず矛盾した構造となるポイントが存在する(整合性が保たれていない)ため例外安全性における基本保証について守ることができない。
 
 * ref: C++ STL設計における例外安全 https://boostjp.github.io/archive/boost_docs/document/generic_exception_safety.html
-
-これに関しては返り値を無視する(そもそも大勢のユーザは意識すらせずに無視しているものと思われる)だけでよい。
 
 ## `Array#sort` が値を返す
 
