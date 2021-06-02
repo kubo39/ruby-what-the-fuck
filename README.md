@@ -17,6 +17,12 @@ nilはfalsyであり0がtruthyなのでセマンティクスが変わってい�
 
 * ref: https://docs.ruby-lang.org/ja/latest/method/Kernel/m/Integer.html
 
+# Float
+
+## `Float#eql?` はあるが approx equal 相当のものがない
+
+むしろ使用頻度の高いもののほうが用意されていない。
+
 # 配列
 
 ## Array#[] の範囲外アクセスは例外ではなくnil
