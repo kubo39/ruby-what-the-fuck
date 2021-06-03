@@ -126,3 +126,59 @@ h.map { |_, v| v += 1 } #=> [2, 3]
 ## letというメソッド名でcall-by-needになっている
 
 意味不明。
+
+## rspec-parameterizedでテストAPIを意図せず上書きしてしまったときのエラーが意味不明になる
+
+以下の例は多少強引だが、whereでテストAPI(ここでは)を上書きできてしまった場合にどうなるかをみる。
+
+```ruby
+require 'rspec-parameterized'
+
+describe 'Bad' do
+  where(:case_name, :a, :b, :expect) do
+    [
+      ['add case1', 1, 1, 2],
+      ['add case2', 2, 1, 3]
+    ]
+  end
+
+  with_them do
+    context "case #{params[:a]} + #{params[:b]}" do
+      it 'should works' do
+        expect { a + b }.to eq expect
+      end
+    end
+  end
+end
+```
+
+テストAPIは `instance_eval` によって上書きされてしまい、意味不明なエラー内容になる。
+
+```console
+$ bundle exec rspec bad.rb
+FF
+
+Failures:
+
+  1) Bad add case1 case 1 + 1 should works
+     Failure/Error: expect { a + b }.to eq expect
+
+     NoMethodError:
+       undefined method `to' for 2:Integer
+     # ./bad.rb:14:in `block (4 levels) in <top (required)>'
+
+  2) Bad add case2 case 2 + 1 should works
+     Failure/Error: expect { a + b }.to eq expect
+
+     NoMethodError:
+       undefined method `to' for 3:Integer
+     # ./bad.rb:14:in `block (4 levels) in <top (required)>'
+
+Finished in 0.00338 seconds (files took 0.32412 seconds to load)
+2 examples, 2 failures
+
+Failed examples:
+
+rspec './bad.rb[1:1:1:1]' # Bad add case1 case 1 + 1 should works
+rspec './bad.rb[1:2:1:1]' # Bad add case2 case 2 + 1 should works
+```
