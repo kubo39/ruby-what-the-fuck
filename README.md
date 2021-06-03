@@ -96,6 +96,12 @@ arr.uniq! #=> nil
 
 破壊的メソッドの返り値を使うべきではないという指摘は正しいが、それであればそもそも値を返すような標準ライブラリのAPIデザインがおかしい。
 
+## `Array#+` `String#+` といった数値演算では加算として扱っている演算子を含んだメソッドを連結に用いている
+
+* ref: https://docs.ruby-lang.org/ja/latest/class/Array.html#I_--2B
+
+* ref: Walter Bright氏のツイート https://twitter.com/WalterBright/status/1378561204050796551
+
 # ハッシュ
 
 ## 連想配列(ハッシュマップ)の名前がハッシュ
