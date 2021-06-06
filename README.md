@@ -119,6 +119,10 @@ end
 
 これによって本来予期しない場所にまで影響が及ぶことがあり、特に依存ライブラリが突然壊れるようになったときなど原因究明が困難となりうる。
 
+影響範囲を限定するRefinements(Module#refine)という機能はあるが、主要なライブラリでは結局オープンクラスを使っているケースが少なからず存在する。
+
+* ref: https://docs.ruby-lang.org/ja/latest/method/Module/i/refine.html
+
 # rspec
 
 ## letというメソッド名でcall-by-needになっている
