@@ -66,24 +66,6 @@ arr = [].freeze
 arr[4] = 100 #=> FrozenError
 ```
 
-## `Array#pop` が値を返す
-
-```ruby
-arr = [1,2]
-arr.pop #=> 2
-arr #=> [1]
-```
-
-pop操作中に値を返すような実装では必ず矛盾した構造となるポイントが存在する(整合性が保たれていない)ため例外安全性における基本保証について守ることができない。
-
-* ref: C++ STL設計における例外安全 https://boostjp.github.io/archive/boost_docs/document/generic_exception_safety.html
-
-## `Array#sort` が値を返す
-
-* ref: https://docs.ruby-lang.org/ja/latest/class/Array.html#I_SORT
-
-だいたい上に同じ。ただしsortの場合はメソッドチェーンに組み込んで使われるためより悪質。
-
 ## `Array#uniq!` `Array#reject!` など異常処理でもないのに値を返したり返さなかったり(正確にはnilを返す)するメソッドが存在する
 
 * ref: https://docs.ruby-lang.org/ja/latest/class/Array.html#I_UNIQ
