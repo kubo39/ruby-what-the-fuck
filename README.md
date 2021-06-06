@@ -169,6 +169,7 @@ end
 ```
 
 テストAPIは `instance_eval` によって上書きされてしまい、意味不明なエラー内容になる。
+`params`や`all_params`を上書きする際には警告が表示されるがRSpecが持っているテストAPIに関しては警告は表示されない。
 
 ```console
 $ bundle exec rspec bad.rb
